@@ -1,12 +1,13 @@
 // Dados do estabelecimento — edite aqui sem mexer no resto do site.
-// ATENÇÃO: o número de WhatsApp abaixo é PROVISÓRIO. Substitua pelo número real.
 
 export const negocio = {
   nome: "Espetaria do Buchecha",
+  nomeCurto: "Buchecha",
   slogan: "Bora de espetinho?",
   subtitulo: "Espetos grelhados na hora, cerveja gelada e gente boa.",
-  bio: "Espetos, Jantinha e Bebidas — restaurante familiar",
-  whatsapp: "5534999999999", // PROVISÓRIO — só números, com DDI 55 + DDD
+  bio: "Restaurante familiar: Espetos, Jantinha e Bebidas",
+  whatsapp: "5534997145327", // só números, com DDI 55 + DDD
+  whatsappExibicao: "(34) 99714-5327",
   instagram: "espetaria_do_buchecha",
   google: {
     nota: 4.7,
@@ -16,10 +17,15 @@ export const negocio = {
   },
   faixaPreco: "R$ 20 a R$ 40 por pessoa",
   funcionamentoResumo: "Aberto até 00h",
-  horarios: [
-    { dia: "Segunda a Domingo", horas: "18h às 00h" }, // confirmar com o cliente
-  ],
+  // CONFIRMAR COM O DONO: horário de funcionamento.
+  // dias: 0 = domingo ... 6 = sábado. fecha "00:00" = meia-noite.
+  horario: { dias: [0, 1, 2, 3, 4, 5, 6], abre: "18:00", fecha: "00:00" },
+  horariosTexto: [{ dia: "Todos os dias", horas: "18h às 00h" }],
   selos: ["Refeição no local", "Drive-through"],
+  pagamentos: ["Pix", "Crédito", "Débito", "Dinheiro"],
+  entrega: true,
+  taxaEntrega: null as number | null, // null = "a combinar" — CONFIRMAR COM O DONO
+  embalagem: 2, // R$ por pedido em Entrega ou Retirada
   endereco: {
     rua: "R. Vinte e Nove de Outubro, 726",
     bairro: "Copacabana",

@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -13,7 +14,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/lib/cart";
-import { Header, Footer } from "@/components/site/Shell";
+import { Header, Footer, BottomNav } from "@/components/site/Shell";
+import { CartSheet } from "@/components/site/Cart";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -80,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { name: "theme-color", content: "#0D0D0D" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-title", content: "Buchecha" },
@@ -122,16 +124,18 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const largo = useRouterState({ select: (s) => s.location.pathname === "/plaquinha" });
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <CartProvider>
-        <div className="flex min-h-screen flex-col bg-coal font-sans">
+        <div className={largo ? "min-h-screen bg-coal font-sans" : "mx-auto flex min-h-screen w-full max-w-[480px] flex-col overflow-x-clip bg-coal font-sans shadow-2xl"}>
           <div className="no-print"><Header /></div>
           <main className="flex-1"><Outlet /></main>
-          <div className="no-print"><Footer /></div>
+          <div className="no-print pb-[calc(4rem+env(safe-area-inset-bottom))]"><Footer /></div>
         </div>
+        <div className="no-print"><BottomNav /><CartSheet /></div>
         <Toaster position="top-center" />
       </CartProvider>
     </QueryClientProvider>

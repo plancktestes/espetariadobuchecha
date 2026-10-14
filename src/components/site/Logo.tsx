@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useImgOk } from "@/hooks/use-img-ok";
 import { logo } from "@/data/imagens";
 
 export function LogoSvg({ className }: { className?: string | undefined }) {
@@ -22,7 +22,7 @@ export function LogoSvg({ className }: { className?: string | undefined }) {
 }
 
 export function Logo({ className }: { className?: string | undefined }) {
-  const [erro, setErro] = useState(false);
-  if (erro) return <LogoSvg className={className} />;
-  return <img src={logo} alt="Espetaria do Buchecha" className={className} onError={() => setErro(true)} />;
+  const img = useImgOk(logo);
+  if (img.state === "erro") return <LogoSvg className={className} />;
+  return <img ref={img.ref} src={logo} alt="Espetaria do Buchecha" className={className} onLoad={img.onLoad} onError={img.onError} />;
 }

@@ -106,8 +106,15 @@
     border-color: var(--color-border);
   }
 
+  html, body { overflow-x: clip; }
+  html { scroll-behavior: smooth; scrollbar-width: none; }
+  html::-webkit-scrollbar, *::-webkit-scrollbar { display: none; }
+  * { scrollbar-width: none; }
+  :focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
   body {
-    background-color: var(--color-background);
+    background-color: #050505;
     color: var(--color-foreground);
   }
 }
@@ -148,4 +155,10 @@
   .no-print { display: none !important; }
   @page { margin: 0; }
   body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@keyframes sobe { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@utility anim-sobe { animation: sobe 450ms ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

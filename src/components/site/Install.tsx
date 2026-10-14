@@ -52,7 +52,7 @@ function Instrucoes({ plataforma }: { plataforma: string }) {
 function InstallSheet({ aberto, setAberto, plataforma }: { aberto: boolean; setAberto: (b: boolean) => void; plataforma: string }) {
   return (
     <Sheet open={aberto} onOpenChange={setAberto}>
-      <SheetContent side="bottom" className="rounded-t-2xl">
+      <SheetContent side="bottom" className="mx-auto max-w-[480px] rounded-t-3xl pb-[env(safe-area-inset-bottom)]">
         <SheetHeader>
           <SheetTitle className="font-display text-3xl uppercase">Instalar aplicativo</SheetTitle>
           <SheetDescription>{SUB}</SheetDescription>
@@ -69,8 +69,8 @@ export function InstallHeaderButton() {
   return (
     <>
       <button onClick={clicar} aria-label="Instalar aplicativo (opcional)" title={SUB}
-        className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground">
-        <Download className="h-4 w-4" /><span className="hidden sm:inline">Instalar aplicativo (opcional)</span>
+        className="grid h-11 w-11 place-items-center rounded-full border border-border text-muted-foreground hover:text-foreground">
+        <Download className="h-5 w-5" />
       </button>
       <InstallSheet aberto={aberto} setAberto={setAberto} plataforma={inst.plataforma} />
     </>
@@ -81,14 +81,14 @@ export function InstallCard() {
   const { inst, aberto, setAberto, clicar } = useInstallFlow();
   if (!inst.pronto || inst.instalado || inst.dispensado) return null;
   return (
-    <div className="relative mx-auto mt-8 flex max-w-md items-center gap-3 rounded-xl border border-border bg-card/80 p-3 text-left backdrop-blur">
+    <div className="relative mx-4 mt-6 flex items-center gap-3 rounded-2xl border border-border bg-card/80 p-3 text-left backdrop-blur">
       <Download className="h-6 w-6 shrink-0 text-secondary" />
-      <div className="flex-1">
+      <div className="min-w-0 flex-1">
         <p className="text-sm font-semibold">Instalar aplicativo (opcional)</p>
         <p className="text-xs text-muted-foreground">{SUB}</p>
       </div>
       <Button size="sm" onClick={clicar}>Instalar</Button>
-      <button onClick={inst.dispensar} aria-label="Dispensar" className="absolute -right-2 -top-2 rounded-full bg-muted p-1"><X className="h-3 w-3" /></button>
+      <button onClick={inst.dispensar} aria-label="Dispensar" className="absolute -right-2 -top-2 grid h-8 w-8 place-items-center rounded-full bg-muted"><X className="h-4 w-4" /></button>
       <InstallSheet aberto={aberto} setAberto={setAberto} plataforma={inst.plataforma} />
     </div>
   );

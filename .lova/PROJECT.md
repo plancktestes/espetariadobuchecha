@@ -11,17 +11,22 @@ Projeto React 19 + TanStack Start/Router com shadcn/ui, Tailwind v4 e Supabase.
 
 # Mapa de arquivos
 - `src/routes/__root.tsx` → Layout raiz
-- `src/routes/index.tsx` → Página inicial
+- `src/routes/index.tsx` → Página inicial (landingpage)
 - `src/router.tsx` → Configuração do router
 - `src/components/ui/*` → Componentes shadcn/ui
 - `src/lib/utils.ts` → Utilitários (cn, etc.)
 - `src/integrations/supabase/` → Cliente Supabase (não editar)
 
 # Decisões do usuário
-- Nenhuma decisão registrada ainda.
+- [x] Landingpage criada com hero section, features e call-to-action
+- Estrutura de hero com título principal, subtítulo e botões de chamada
+- Seção de features com 3 cards (Design Intuitivo, Integração Fácil, Suporte dedicado)
+- Seção final de call-to-action com botão de chamada principal
 
 # Pendências
-- [ ] Aguardando primeiro pedido de tarefa
+- [ ] Landingpage criada com sucesso
+- [ ] Verificar responsividade em dispositivos móveis
+- [ ] Testar em diferentes navegadores
 
 # Banco de dados
 - Supabase configurado via integração existente. Nenhuma migração customizada ainda.

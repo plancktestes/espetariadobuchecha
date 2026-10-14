@@ -42,7 +42,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const destaques = cardapio[0].itens.slice(0, 4);
+  const destaques = (cardapio[0]?.itens ?? []).slice(0, 4);
   return (
     <>
       <section className="relative overflow-hidden">

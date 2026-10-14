@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { logo } from "@/data/imagens";
 
-export function LogoSvg({ className }: { className?: string }) {
+export function LogoSvg({ className }: { className?: string | undefined }) {
   return (
     <svg viewBox="0 0 200 200" className={className} role="img" aria-label="Espetaria do Buchecha">
       <polygon points="100,6 182,53 182,147 100,194 18,147 18,53" fill="#0D0D0D" stroke="#fff" strokeWidth="6" />
@@ -21,7 +21,7 @@ export function LogoSvg({ className }: { className?: string }) {
   );
 }
 
-export function Logo({ className }: { className?: string }) {
+export function Logo({ className }: { className?: string | undefined }) {
   const [erro, setErro] = useState(false);
   if (erro) return <LogoSvg className={className} />;
   return <img src={logo} alt="Espetaria do Buchecha" className={className} onError={() => setErro(true)} />;

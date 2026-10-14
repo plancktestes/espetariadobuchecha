@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export function ItemImage({
   src, alt, nome, ratio = "square", className, eager,
-}: { src?: string; alt: string; nome: string; ratio?: "square" | "video"; className?: string; eager?: boolean }) {
+}: { src?: string | undefined; alt: string; nome: string; ratio?: "square" | "video"; className?: string; eager?: boolean }) {
   const [erro, setErro] = useState(!src);
   return (
     <div className={cn("relative overflow-hidden bg-ember", ratio === "square" ? "aspect-square" : "aspect-video", className)}>

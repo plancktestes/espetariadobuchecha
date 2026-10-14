@@ -1,46 +1,54 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import type { Item } from "@/data/cardapio";
 
-type Linha = { item: Item; qtd: number };
+export type Linha = { key: string; slug: string; nome: string; opcao?: string; preco: number; qtd: number; obs: string };
+type Novo = { slug: string; nome: string; opcao?: string; preco: number; qtd?: number; obs?: string };
 type Ctx = {
   linhas: Linha[];
-  add: (i: Item) => void;
-  dec: (slug: string) => void;
+  add: (n: Novo) => void;
+  setQtd: (key: string, qtd: number) => void;
+  setObs: (key: string, obs: string) => void;
   clear: () => void;
-  total: number;
+  subtotal: number;
   count: number;
+  aberto: boolean;
+  setAberto: (b: boolean) => void;
 };
 
 const CartCtx = createContext<Ctx | null>(null);
-const KEY = "buchecha-carrinho";
+const KEY = "buchecha-carrinho-v2";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [linhas, setLinhas] = useState<Linha[]>([]);
+  const [aberto, setAberto] = useState(false);
+  const [carregado, setCarregado] = useState(false);
   useEffect(() => {
     try {
       const raw = localStorage.getItem(KEY);
-      if (raw) setLinhas(JSON.parse(raw));
+      const v = raw ? JSON.parse(raw) : [];
+      if (Array.isArray(v)) setLinhas(v.filter((l) => l && typeof l.preco === "number" && l.qtd > 0));
     } catch {}
+    setCarregado(true);
   }, []);
   useEffect(() => {
-    try {
-      localStorage.setItem(KEY, JSON.stringify(linhas));
-    } catch {}
-  }, [linhas]);
+    if (!carregado) return;
+    try { localStorage.setItem(KEY, JSON.stringify(linhas)); } catch {}
+  }, [linhas, carregado]);
 
-  const add = (item: Item) =>
+  const add = (n: Novo) =>
     setLinhas((l) => {
-      const e = l.find((x) => x.item.slug === item.slug);
-      return e ? l.map((x) => (x === e ? { ...x, qtd: x.qtd + 1 } : x)) : [...l, { item, qtd: 1 }];
+      const key = `${n.slug}|${n.opcao ?? ""}`;
+      const e = l.find((x) => x.key === key);
+      const q = n.qtd ?? 1;
+      if (e) return l.map((x) => (x === e ? { ...x, qtd: x.qtd + q, obs: n.obs || x.obs } : x));
+      return [...l, { key, slug: n.slug, nome: n.nome, opcao: n.opcao, preco: n.preco, qtd: q, obs: n.obs ?? "" }];
     });
-  const dec = (slug: string) =>
-    setLinhas((l) =>
-      l.flatMap((x) => (x.item.slug === slug ? (x.qtd > 1 ? [{ ...x, qtd: x.qtd - 1 }] : []) : [x])),
-    );
-  const total = linhas.reduce((s, x) => s + (x.item.price ?? 0) * x.qtd, 0);
+  const setQtd = (key: string, qtd: number) =>
+    setLinhas((l) => l.flatMap((x) => (x.key === key ? (qtd > 0 ? [{ ...x, qtd }] : []) : [x])));
+  const setObs = (key: string, obs: string) => setLinhas((l) => l.map((x) => (x.key === key ? { ...x, obs } : x)));
+  const subtotal = linhas.reduce((s, x) => s + x.preco * x.qtd, 0);
   const count = linhas.reduce((s, x) => s + x.qtd, 0);
   return (
-    <CartCtx.Provider value={{ linhas, add, dec, clear: () => setLinhas([]), total, count }}>
+    <CartCtx.Provider value={{ linhas, add, setQtd, setObs, clear: () => setLinhas([]), subtotal, count, aberto, setAberto }}>
       {children}
     </CartCtx.Provider>
   );

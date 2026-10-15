@@ -37,12 +37,12 @@ function Reservar() {
   const [ocasiao, setOcasiao] = useState("");
   const [obs, setObs] = useState("");
   const [lim, setLim] = useState({ min: "", max: "" });
-  const [erros, setErros] = useState<Record<string, string>>({});
+  const [erros, setErros] = useState<Partial<Record<"nome" | "data" | "hora", string>>>({});
 
   useEffect(() => { const h = agoraSP().iso; setLim({ min: h, max: somaDias(h, 30) }); }, []);
 
   const enviar = () => {
-    const e: Record<string, string> = {};
+    const e: Partial<Record<"nome" | "data" | "hora", string>> = {};
     if (nome.trim().length < 2) e.nome = "Informe seu nome.";
     if (!data || (lim.min && (data < lim.min || data > lim.max))) e.data = "Escolha uma data nos próximos 30 dias.";
     if (!hora) e.hora = "Escolha um horário.";

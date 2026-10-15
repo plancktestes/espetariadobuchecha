@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-export type Linha = { key: string; slug: string; nome: string; opcao?: string; preco: number; qtd: number; obs: string };
-type Novo = { slug: string; nome: string; opcao?: string; preco: number; qtd?: number; obs?: string };
+export type Linha = { key: string; slug: string; nome: string; opcao?: string | undefined; preco: number; qtd: number; obs: string };
+type Novo = { slug: string; nome: string; opcao?: string | undefined; preco: number; qtd?: number; obs?: string };
 type Ctx = {
   linhas: Linha[];
   add: (n: Novo) => void;

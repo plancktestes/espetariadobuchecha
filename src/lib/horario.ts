@@ -12,6 +12,8 @@ export function agoraSP() {
       timeZone: "America/Sao_Paulo", weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false,
       year: "numeric", month: "2-digit", day: "2-digit",
     }).formatToParts(new Date()).map((x) => [x.type, x.value]),
+  ) as { weekday?: string; hour?: string; minute?: string; year?: string; month?: string; day?: string };
+  void 0;
   );
   const dias = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return {

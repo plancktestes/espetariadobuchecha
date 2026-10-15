@@ -33,7 +33,8 @@ import agua from "@/assets/itens/agua.jpg";
 import energetico from "@/assets/itens/energetico.jpg";
 import suco from "@/assets/itens/suco.jpg";
 
-export const logo = "/images/logo.png";
+// Coloque o arquivo do logo em public/images/logo.png e troque "" por "/images/logo.png".
+export const logo = "";
 
 export const imagensHero = { hero, sobre, combos: combosImg };
 

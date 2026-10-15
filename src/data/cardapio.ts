@@ -8,7 +8,7 @@ export type Item = {
   nome: string;
   descricao: string;
   preco: number | null;
-  opcoes?: Opcoes;
+  opcoes?: Opcoes | undefined;
   categoria: string;
   tags: string[];
 };

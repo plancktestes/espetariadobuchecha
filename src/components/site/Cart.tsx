@@ -71,7 +71,7 @@ export function CartSheet() {
   const [pagamento, setPagamento] = useState<string>("");
   const [troco, setTroco] = useState("");
   const [obsGeral, setObsGeral] = useState("");
-  const [erros, setErros] = useState<Record<string, string>>({});
+  const [erros, setErros] = useState<Partial<Record<"itens" | "nome" | "tipo" | "endereco" | "bairro" | "pagamento", string>>>({});
 
   useEffect(() => { if (!aberto) setEtapa("itens"); }, [aberto]);
 
@@ -80,7 +80,7 @@ export function CartSheet() {
   const total = subtotal + embalagem + (taxa ?? 0);
 
   const enviar = () => {
-    const e: Record<string, string> = {};
+    const e: Partial<Record<"itens" | "nome" | "tipo" | "endereco" | "bairro" | "pagamento", string>> = {};
     if (!linhas.length) e.itens = "Adicione pelo menos um item.";
     if (nome.trim().length < 2) e.nome = "Informe seu nome.";
     if (!tipo) e.tipo = "Escolha como quer receber.";

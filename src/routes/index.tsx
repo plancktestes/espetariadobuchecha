@@ -90,11 +90,12 @@ function Index() {
               <a href={whatsappLink("Olá! Vim pelo site da Espetaria do Buchecha.")} target="_blank" rel="noreferrer"><MessageCircle className="h-5 w-5" /> Chamar no WhatsApp</a>
             </Button>
           </div>
-          <div className="mt-5 flex flex-wrap justify-center gap-2 text-xs">
+          <div className="mt-5 flex flex-col items-center gap-1 text-xs">
             <StatusSelo />
-            <span className="selo"><Wallet className="h-3.5 w-3.5 text-primary" />{negocio.faixaPreco}</span>
-            <span className="selo"><Utensils className="h-3.5 w-3.5 text-primary" />{negocio.selos[0]}</span>
-            <span className="selo"><Car className="h-3.5 w-3.5 text-primary" />{negocio.selos[1]}</span>
+            <div className="flex flex-wrap justify-center gap-2">
+              <span className="selo"><Wallet className="h-3.5 w-3.5 text-primary" />{negocio.faixaPreco}</span>
+              <span className="selo"><Utensils className="h-3.5 w-3.5 text-primary" />{negocio.selos[0]}</span>
+            </div>
           </div>
         </div>
       </section>

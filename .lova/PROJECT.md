@@ -22,9 +22,10 @@ Projeto React 19 + TanStack Start/Router com shadcn/ui, Tailwind v4 e Supabase.
 - Estrutura de hero com título principal, subtítulo e botões de chamada
 - Seção de features com 3 cards (Design Intuitivo, Integração Fácil, Suporte dedicado)
 - Seção final de call-to-action com botão de chamada principal
+- [x] Remover selo "Drive-through" e reorganizar selos: "R$ 20 a R$ 40 por pessoa" e "Refeição no local" na mesma linha, "Aberto agora · até 00h" centralizado na linha de cima
 
 # Pendências
-- [ ] Landingpage criada com sucesso
+- [x] Landingpage criada com sucesso
 - [ ] Verificar responsividade em dispositivos móveis
 - [ ] Testar em diferentes navegadores
 

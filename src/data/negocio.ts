@@ -21,7 +21,7 @@ export const negocio = {
   // dias: 0 = domingo ... 6 = sábado. fecha "00:00" = meia-noite.
   horario: { dias: [0, 1, 2, 3, 4, 5, 6], abre: "18:00", fecha: "00:00" },
   horariosTexto: [{ dia: "Todos os dias", horas: "18h às 00h" }],
-  selos: ["Refeição no local", "Drive-through"],
+  selos: ["Refeição no local"],
   pagamentos: ["Pix", "Crédito", "Débito", "Dinheiro"],
   entrega: true,
   taxaEntrega: null as number | null, // null = "a combinar" — CONFIRMAR COM O DONO
